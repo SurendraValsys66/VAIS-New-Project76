@@ -326,8 +326,7 @@ const intentTopics = [
 const steps = [
   { id: 1, name: "Product Configuration", icon: Tag },
   { id: 2, name: "Intent Topics", icon: Target },
-  { id: 3, name: "Suppression File", icon: Upload },
-  { id: 4, name: "Build VAIS", icon: Building },
+  { id: 3, name: "Build VAIS", icon: Building },
 ];
 
 export default function BuildVAISForm() {
@@ -454,8 +453,6 @@ export default function BuildVAISForm() {
       case 2:
         return selectedTopics.length > 0;
       case 3:
-        return uploadedFile && fileStatus === "valid"; // Only green when file is uploaded and valid
-      case 4:
         return isFormValid();
       default:
         return false;
