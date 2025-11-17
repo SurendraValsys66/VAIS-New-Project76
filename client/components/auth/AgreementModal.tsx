@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Dialog,
   DialogContent,
@@ -8,11 +8,13 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
+import { Check } from "lucide-react";
 
 interface AgreementModalProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
   onConfirm: () => void;
+  isAlreadyConfirmed?: boolean;
 }
 
 const AGREEMENT_CONTENT = `MASTER SUBSCRIBER AGREEMENT – VAIS (Valasys AI)
@@ -202,8 +204,15 @@ export default function AgreementModal({
   open,
   onOpenChange,
   onConfirm,
+  isAlreadyConfirmed = false,
 }: AgreementModalProps) {
   const [agreementConfirmed, setAgreementConfirmed] = useState(false);
+
+  useEffect(() => {
+    if (open && isAlreadyConfirmed) {
+      setAgreementConfirmed(true);
+    }
+  }, [open, isAlreadyConfirmed]);
 
   const handleConfirm = () => {
     if (agreementConfirmed) {
@@ -265,12 +274,13 @@ export default function AgreementModal({
               type="button"
               onClick={handleConfirm}
               disabled={!agreementConfirmed}
-              className={`font-medium transition-all duration-200 ${
+              className={`font-medium transition-all duration-200 flex items-center gap-2 ${
                 agreementConfirmed
                   ? "bg-valasys-orange hover:bg-valasys-orange-light text-white"
                   : "bg-valasys-gray-200 text-valasys-gray-500 cursor-not-allowed"
               }`}
             >
+              {agreementConfirmed && <Check className="w-4 h-4" />}
               I agree & confirm
             </Button>
           </div>
