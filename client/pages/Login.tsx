@@ -675,45 +675,50 @@ export default function Login() {
               {/* Carousel Container */}
               <div className="relative">
                 {/* Testimonial Cards Grid (2 visible) */}
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-2 gap-6">
                   {[currentTestimonialIndex, (currentTestimonialIndex + 1) % testimonials.length].map((index) => {
                     const testimonial = testimonials[index];
                     return (
                       <div
                         key={testimonial.id}
-                        className="bg-white/70 backdrop-blur-sm rounded-2xl p-6 border border-white/40 hover:border-valasys-orange/30 hover:bg-white/90 transition-all duration-300 shadow-sm"
+                        className="bg-gradient-to-br from-white/80 to-white/60 backdrop-blur-sm rounded-2xl p-7 border border-white/50 hover:border-valasys-orange/40 hover:from-white/90 hover:to-white/75 transition-all duration-300 shadow-lg hover:shadow-xl group"
                       >
-                        {/* Top Row: Avatar, Name, Rating */}
-                        <div className="flex items-start justify-between mb-4">
+                        {/* Header: Avatar and Name */}
+                        <div className="flex items-start justify-between gap-4 mb-5">
                           <div className="flex items-start gap-3 flex-1">
-                            <div className={`w-12 h-12 rounded-full bg-gradient-to-br ${testimonial.color} flex items-center justify-center text-white text-sm font-bold flex-shrink-0`}>
+                            <div className={`w-14 h-14 rounded-full bg-gradient-to-br ${testimonial.color} flex items-center justify-center text-white text-sm font-bold flex-shrink-0 shadow-md`}>
                               {testimonial.initials}
                             </div>
-                            <div className="flex-1">
-                              <h4 className="font-semibold text-sm text-valasys-gray-900">
+                            <div className="flex-1 pt-1">
+                              <h4 className="font-bold text-sm text-valasys-gray-900 leading-tight">
                                 {testimonial.name}
                               </h4>
-                              <p className="text-xs text-valasys-gray-600">
+                              <p className="text-xs text-valasys-gray-600 mt-0.5">
                                 {testimonial.title}
                               </p>
                             </div>
                           </div>
+                          {/* G2 Badge Icon */}
+                          <div className="w-10 h-10 rounded-full bg-valasys-orange/20 flex items-center justify-center flex-shrink-0">
+                            <span className="text-valasys-orange text-xs font-bold">G2</span>
+                          </div>
                         </div>
 
-                        {/* Rating */}
-                        <div className="flex gap-1 mb-3">
+                        {/* Rating Stars */}
+                        <div className="flex gap-0.5 mb-4">
                           {[...Array(testimonial.rating)].map((_, i) => (
-                            <span key={i} className="text-valasys-orange text-lg">★</span>
+                            <span key={i} className="text-valasys-orange text-lg leading-none">★</span>
                           ))}
+                          <span className="text-xs text-valasys-gray-600 ml-2 font-medium">5.0 out of 5</span>
                         </div>
 
-                        {/* Review Quote */}
-                        <h5 className="font-semibold text-sm text-valasys-gray-900 mb-2">
+                        {/* Review Title/Quote */}
+                        <h5 className="font-bold text-sm text-valasys-gray-900 mb-3 leading-snug">
                           "{testimonial.quote}"
                         </h5>
 
                         {/* Review Text */}
-                        <p className="text-xs text-valasys-gray-600 leading-relaxed">
+                        <p className="text-xs text-valasys-gray-700 leading-relaxed mb-0">
                           {testimonial.review}
                         </p>
                       </div>
