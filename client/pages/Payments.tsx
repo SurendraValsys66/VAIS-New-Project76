@@ -325,13 +325,19 @@ function ModernPaymentCard({
               </div>
               <div className="flex items-center gap-2 flex-wrap justify-end">
                 <div className="bg-green-100 px-3 py-1.5 rounded-full border border-green-300">
-                  <span className="flex items-center gap-1.5 text-green-700 font-semibold" style={{ fontSize: "12px" }}>
+                  <span
+                    className="flex items-center gap-1.5 text-green-700 font-semibold"
+                    style={{ fontSize: "12px" }}
+                  >
                     <span className="inline-flex h-2 w-2 rounded-full bg-green-500 animate-pulse"></span>
                     Autopay enabled
                   </span>
                 </div>
                 <div className="bg-blue-50 px-3 py-1.5 rounded-full border border-blue-300">
-                  <span className="flex items-center gap-1.5 text-blue-700 font-semibold" style={{ fontSize: "12px" }}>
+                  <span
+                    className="flex items-center gap-1.5 text-blue-700 font-semibold"
+                    style={{ fontSize: "12px" }}
+                  >
                     <CheckCircle className="w-3.5 h-3.5" />
                     Default
                   </span>
@@ -369,7 +375,9 @@ function ModernPaymentCard({
                 </div>
                 {!isPayPal && (
                   <div className="text-right">
-                    <p className="text-xs font-medium text-gray-600 mb-1">VALID</p>
+                    <p className="text-xs font-medium text-gray-600 mb-1">
+                      VALID
+                    </p>
                     <p className="font-mono font-bold text-sm text-gray-900">
                       {method.expiryDate}
                     </p>
@@ -430,7 +438,9 @@ function ModernPaymentCard({
                 </div>
                 {!isPayPal && (
                   <div className="text-right">
-                    <p className="text-xs font-medium text-gray-600 mb-1">VALID</p>
+                    <p className="text-xs font-medium text-gray-600 mb-1">
+                      VALID
+                    </p>
                     <p className="font-mono font-bold text-sm text-gray-900">
                       {method.expiryDate}
                     </p>
@@ -441,7 +451,6 @@ function ModernPaymentCard({
           </div>
         )}
       </div>
-
 
       <AlertDialog open={deleteOpen} onOpenChange={setDeleteOpen}>
         <AlertDialogContent className="sm:max-w-md">
@@ -596,7 +605,7 @@ export default function Payments() {
       prev.map((pm) => ({
         ...pm,
         isDefault: pm.id === id,
-      }))
+      })),
     );
   };
 
