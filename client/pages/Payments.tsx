@@ -351,6 +351,15 @@ function ModernPaymentCard({
                   <CheckCircle className="w-4 h-4" />
                 </button>
               )}
+              {onEdit && (
+                <button
+                  onClick={() => onEdit(method.id)}
+                  className="p-2 rounded-full bg-blue-100 border border-blue-300 text-blue-600 hover:bg-blue-200 transition-all duration-200"
+                  title="Edit card"
+                >
+                  <Edit2 className="w-4 h-4" />
+                </button>
+              )}
               <button
                 onClick={() => setDeleteOpen(true)}
                 className="p-2 rounded-full bg-red-100 border border-red-300 text-red-600 hover:bg-red-200 transition-all duration-200"
