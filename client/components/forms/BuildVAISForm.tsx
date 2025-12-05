@@ -483,36 +483,26 @@ export default function BuildVAISForm() {
   };
 
   const getTopicInsight = (topic: (typeof intentTopics)[0]) => (
-    <div className="space-y-5">
-      <div className="space-y-1">
+    <div className="space-y-4">
+      <div className="space-y-2">
         <h3 className="text-lg font-bold text-valasys-gray-900">{topic.name}</h3>
         <p className="text-sm text-valasys-gray-600 leading-relaxed">{topic.description}</p>
       </div>
 
-      <div className="grid grid-cols-2 gap-4">
-        <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg p-4 border border-blue-200">
-          <div className="flex items-center mb-2">
-            <TrendingUp className="w-4 h-4 text-blue-600 mr-2" />
-            <span className="text-xs font-semibold text-blue-600 uppercase tracking-wide">Volume</span>
-          </div>
-          <p className="text-lg font-bold text-blue-900">{topic.volume}</p>
+      <div className="space-y-2">
+        <div className="flex items-center justify-between py-2">
+          <span className="text-sm font-medium text-valasys-gray-700 flex items-center">
+            <TrendingUp className="w-4 h-4 mr-2 text-valasys-orange" />
+            Volume
+          </span>
+          <span className="text-sm font-semibold text-valasys-gray-900">{topic.volume}</span>
         </div>
-
-        <div className="bg-gradient-to-br from-green-50 to-green-100 rounded-lg p-4 border border-green-200">
-          <div className="flex items-center mb-2">
-            <Target className="w-4 h-4 text-green-600 mr-2" />
-            <span className="text-xs font-semibold text-green-600 uppercase tracking-wide">Conversion</span>
-          </div>
-          <p className="text-lg font-bold text-green-900">{topic.conversion}</p>
-        </div>
-      </div>
-
-      <div className="pt-2 border-t border-valasys-gray-200">
-        <div className="flex items-center justify-between">
-          <span className="text-xs font-medium text-valasys-gray-600">Prospect Quality Score</span>
-          <Badge className="bg-valasys-orange text-white text-xs px-2.5 py-1 font-semibold">
-            High Intent
-          </Badge>
+        <div className="flex items-center justify-between py-2">
+          <span className="text-sm font-medium text-valasys-gray-700 flex items-center">
+            <Target className="w-4 h-4 mr-2 text-valasys-orange" />
+            Conversion Rate
+          </span>
+          <span className="text-sm font-semibold text-valasys-gray-900">{topic.conversion}</span>
         </div>
       </div>
     </div>
