@@ -1,12 +1,10 @@
 import { useState } from "react";
 import {
   Dialog,
-  DialogClose,
   DialogContent,
-  DialogHeader,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { X, Bold, Italic, Strikethrough, Link, List, ListOrdered, Code } from "lucide-react";
+import { Bold, Italic, Strikethrough, Link, List, ListOrdered, Code } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface FeedbackModalProps {
