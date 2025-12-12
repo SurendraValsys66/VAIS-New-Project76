@@ -185,7 +185,7 @@ export default function Templates() {
                   <Label htmlFor="template-subject">Email Subject</Label>
                   <Input
                     id="template-subject"
-                    placeholder="e.g., Welcome to {{companyName}}"
+                    placeholder="e.g., Welcome to [companyName]"
                     value={newTemplate.subject}
                     onChange={(e) =>
                       setNewTemplate({ ...newTemplate, subject: e.target.value })
