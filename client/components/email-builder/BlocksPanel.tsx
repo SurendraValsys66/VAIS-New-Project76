@@ -187,10 +187,6 @@ export const BlocksPanel: React.FC<BlocksPanelProps> = ({ onAddBlock }) => {
       block.description.toLowerCase().includes(searchQuery.toLowerCase()),
   );
 
-  const handleBlockClick = (block: BlockOption) => {
-    onAddBlock(block.onCreate());
-  };
-
   return (
     <div className="flex flex-col h-full bg-white border-r border-gray-200">
       <Tabs defaultValue="blocks" className="flex flex-col h-full">
