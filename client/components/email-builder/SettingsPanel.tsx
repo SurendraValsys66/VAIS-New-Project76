@@ -923,14 +923,10 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
               </h4>
               <div className="space-y-3">
                 <div>
-                  <Label
-                    htmlFor="textFontSize"
-                    className="text-xs text-gray-700 mb-1 block"
-                  >
+                  <Label className="text-xs text-gray-700 mb-1 block">
                     Font Size
                   </Label>
                   <Input
-                    id="textFontSize"
                     type="number"
                     min="8"
                     max="72"
@@ -946,14 +942,10 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
                 </div>
 
                 <div>
-                  <Label
-                    htmlFor="textFontWeight"
-                    className="text-xs text-gray-700 mb-1 block"
-                  >
+                  <Label className="text-xs text-gray-700 mb-1 block">
                     Font Weight
                   </Label>
                   <select
-                    id="textFontWeight"
                     value={block.fontWeight}
                     onChange={(e) =>
                       onBlockUpdate({
@@ -969,14 +961,10 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
                 </div>
 
                 <div>
-                  <Label
-                    htmlFor="textFontStyle"
-                    className="text-xs text-gray-700 mb-1 block"
-                  >
+                  <Label className="text-xs text-gray-700 mb-1 block">
                     Font Style
                   </Label>
                   <select
-                    id="textFontStyle"
                     value={block.fontStyle}
                     onChange={(e) =>
                       onBlockUpdate({
@@ -992,14 +980,10 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
                 </div>
 
                 <div>
-                  <Label
-                    htmlFor="textFontColor"
-                    className="text-xs text-gray-700 mb-1 block"
-                  >
+                  <Label className="text-xs text-gray-700 mb-1 block">
                     Text Color
                   </Label>
                   <Input
-                    id="textFontColor"
                     type="color"
                     value={block.fontColor}
                     onChange={(e) =>
@@ -1015,8 +999,7 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
                 Content visibility
               </h4>
               <p className="text-xs text-gray-500 mb-3">
-                Display content based on the type of device or other specific
-                conditions
+                Display content based on the type of device or other specific conditions
               </p>
               <div className="flex gap-2 flex-wrap">
                 <Button
