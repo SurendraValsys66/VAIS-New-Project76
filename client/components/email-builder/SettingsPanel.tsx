@@ -20,6 +20,7 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
   const [groupPaddingSides, setGroupPaddingSides] = useState(true);
   const [groupMarginSides, setGroupMarginSides] = useState(false);
   const [applyBorderToAllSides, setApplyBorderToAllSides] = useState(true);
+  const [linkType, setLinkType] = useState("url");
   const paddingValue = "padding" in (block || {}) ? (block as any).padding ?? 0 : 0;
   const marginValue = "margin" in (block || {}) ? (block as any).margin ?? 0 : 0;
   const [paddingTop, setPaddingTop] = useState(paddingValue);
