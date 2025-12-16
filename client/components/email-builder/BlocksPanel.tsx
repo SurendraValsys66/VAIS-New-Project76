@@ -232,16 +232,7 @@ export const BlocksPanel: React.FC<BlocksPanelProps> = ({ onAddBlock }) => {
             <div className="p-4">
               <div className="grid grid-cols-3 gap-3">
                 {filteredBlocks.map((block) => (
-                  <button
-                    key={block.id}
-                    onClick={() => handleBlockClick(block)}
-                    className="flex flex-col items-center justify-center p-4 rounded-lg border border-gray-200 hover:border-valasys-orange hover:bg-orange-50 transition-all hover:shadow-md"
-                  >
-                    <div className="mb-2">{block.icon}</div>
-                    <span className="text-sm font-medium text-gray-900">
-                      {block.label}
-                    </span>
-                  </button>
+                  <DraggableBlockButton key={block.id} block={block} />
                 ))}
               </div>
             </div>
