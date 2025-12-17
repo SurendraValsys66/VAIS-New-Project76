@@ -42,6 +42,7 @@ export const TitleBlockComponent: React.FC<TitleBlockComponentProps> = ({
             backgroundColor: block.backgroundColor,
             textAlign: block.alignment as any,
             fontWeight: block.fontWeight as any,
+            userSelect: "text",
           }}
         />
       ) : (
@@ -54,6 +55,7 @@ export const TitleBlockComponent: React.FC<TitleBlockComponentProps> = ({
             fontWeight: block.fontWeight as any,
             margin: 0,
             padding: "8px",
+            userSelect: "none",
           }}
         >
           {block.content}
