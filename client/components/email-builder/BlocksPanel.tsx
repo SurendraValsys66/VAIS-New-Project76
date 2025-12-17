@@ -163,7 +163,40 @@ const DraggableTemplateCard: React.FC<DraggableTemplateProps> = ({
 const SectionsPanel: React.FC<SectionsPanelProps> = ({ onAddBlock }) => {
   const [expandedSection, setExpandedSection] = useState<string | null>(null);
 
-  const textImageTemplates: Template[] = [];
+  const textImageTemplates: Template[] = [
+    {
+      id: "top-image-section",
+      title: "Top Image Section",
+      description:
+        "Image at top, followed by title, description text, and call-to-action button",
+      preview:
+        "https://images.unsplash.com/photo-1470114716159-e389f8712fda?w=400&h=200&fit=crop",
+      blocks: () => [
+        createImageBlock(),
+        createTitleBlock(),
+        createTextBlock(),
+        createButtonBlock(),
+      ],
+    },
+    {
+      id: "left-image-section",
+      title: "Left Image Section",
+      description:
+        "Image on left side with title, description text, and CTA button on right side",
+      preview:
+        "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=400&h=200&fit=crop",
+      blocks: () => [createSplitImageCardBlock("left")],
+    },
+    {
+      id: "right-image-section",
+      title: "Right Image Section",
+      description:
+        "Image on right side with title, description text, and CTA button on left side",
+      preview:
+        "https://images.unsplash.com/photo-1470114716159-e389f8712fda?w=400&h=200&fit=crop",
+      blocks: () => [createSplitImageCardBlock("right")],
+    },
+  ];
 
   const sections: Section[] = [
     {
