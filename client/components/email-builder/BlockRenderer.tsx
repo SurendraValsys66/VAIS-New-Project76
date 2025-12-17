@@ -15,6 +15,8 @@ import { NavigationBlockComponent } from "./blocks/NavigationBlockComponent";
 import { HeaderBlockComponent } from "./blocks/HeaderBlockComponent";
 import { FooterBlockComponent } from "./blocks/FooterBlockComponent";
 import { SpacerBlockComponent } from "./blocks/SpacerBlockComponent";
+import { CenteredImageCardBlockComponent } from "./blocks/CenteredImageCardBlockComponent";
+import { SplitImageCardBlockComponent } from "./blocks/SplitImageCardBlockComponent";
 
 interface BlockRendererProps {
   block: ContentBlock;
