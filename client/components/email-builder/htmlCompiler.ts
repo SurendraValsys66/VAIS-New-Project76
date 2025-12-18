@@ -93,98 +93,122 @@ const semanticTagStyles: Record<string, TagStyleConfig> = {
  * Handles basic HTML parsing without external dependencies
  */
 function parseHTML(html: string): ParsedNode[] {
-  const nodes: ParsedNode[] = [];
-  let currentPos = 0;
+  try {
+    const nodes: ParsedNode[] = [];
+    let currentPos = 0;
 
-  // Normalize whitespace for parsing
-  const normalized = html.trim();
+    // Normalize whitespace for parsing
+    const normalized = html.trim();
 
-  while (currentPos < normalized.length) {
-    // Check for tag
-    if (normalized[currentPos] === "<") {
-      const tagEnd = normalized.indexOf(">", currentPos);
-      if (tagEnd === -1) break;
+    if (!normalized) return nodes;
 
-      const tagContent = normalized.substring(currentPos + 1, tagEnd);
+    while (currentPos < normalized.length) {
+      // Check for tag
+      if (normalized[currentPos] === "<") {
+        const tagEnd = normalized.indexOf(">", currentPos);
+        if (tagEnd === -1) break;
 
-      // Check if it's a closing tag
-      if (tagContent.startsWith("/")) {
-        currentPos = tagEnd + 1;
-        continue;
-      }
+        const tagContent = normalized.substring(currentPos + 1, tagEnd).trim();
 
-      // Check if it's a self-closing tag
-      const isSelfClosing =
-        tagContent.endsWith("/") ||
-        ["img", "br", "hr", "input", "meta", "link"].includes(
-          tagContent.split(/\s/)[0].toLowerCase()
-        );
-
-      // Parse tag name and attributes
-      const match = tagContent.match(/^([a-zA-Z0-9-]+)(.*?)$/);
-      if (!match) {
-        currentPos = tagEnd + 1;
-        continue;
-      }
-      const tag = match[1].toLowerCase();
-      const attrString = match[2] || "";
-
-      // Parse attributes
-      const attributes: Record<string, string> = {};
-      const attrRegex = /(\w+)=["']([^"']*)["']|\w+/g;
-      let attrMatch;
-
-      while ((attrMatch = attrRegex.exec(attrString)) !== null) {
-        if (attrMatch[1]) {
-          attributes[attrMatch[1].toLowerCase()] = attrMatch[2] || "";
+        // Skip empty tags or malformed content
+        if (!tagContent) {
+          currentPos = tagEnd + 1;
+          continue;
         }
-      }
 
-      // Find matching closing tag
-      let content = "";
-      let children: ParsedNode[] = [];
-      let innerPos = tagEnd + 1;
+        // Check if it's a closing tag
+        if (tagContent.startsWith("/")) {
+          currentPos = tagEnd + 1;
+          continue;
+        }
 
-      if (!isSelfClosing) {
-        const closingTag = `</${tag}>`;
-        const closePos = normalized.indexOf(closingTag, innerPos);
+        // Check if it's a comment or special tag
+        if (tagContent.startsWith("!") || tagContent.startsWith("?")) {
+          currentPos = tagEnd + 1;
+          continue;
+        }
 
-        if (closePos !== -1) {
-          const innerHTML = normalized.substring(innerPos, closePos);
-          // Recursively parse inner HTML
-          children = parseHTML(innerHTML);
-          currentPos = closePos + closingTag.length;
+        // Extract tag name (handle tags with hyphens and numbers)
+        const tagNameMatch = tagContent.match(/^([a-zA-Z][a-zA-Z0-9-]*)/);
+        if (!tagNameMatch || !tagNameMatch[1]) {
+          currentPos = tagEnd + 1;
+          continue;
+        }
+
+        const tag = tagNameMatch[1].toLowerCase();
+        const attrString = tagContent.substring(tagNameMatch[0].length).trim();
+
+        // Check if it's a self-closing tag
+        const isSelfClosing =
+          tagContent.endsWith("/") ||
+          ["img", "br", "hr", "input", "meta", "link"].includes(tag);
+
+        // Parse attributes
+        const attributes: Record<string, string> = {};
+        if (attrString) {
+          const attrRegex = /(\w+(?:-\w+)*)=["']([^"']*?)["']|(\w+(?:-\w+)*)/g;
+          let attrMatch;
+
+          while ((attrMatch = attrRegex.exec(attrString)) !== null) {
+            if (attrMatch[1]) {
+              attributes[attrMatch[1].toLowerCase()] = attrMatch[2] || "";
+            } else if (attrMatch[3]) {
+              attributes[attrMatch[3].toLowerCase()] = "";
+            }
+          }
+        }
+
+        // Find matching closing tag
+        let children: ParsedNode[] = [];
+        let innerPos = tagEnd + 1;
+
+        if (!isSelfClosing) {
+          const closingTag = `</${tag}>`;
+          const closePos = normalized.indexOf(closingTag, innerPos);
+
+          if (closePos !== -1) {
+            const innerHTML = normalized.substring(innerPos, closePos);
+            // Recursively parse inner HTML
+            if (innerHTML.trim()) {
+              children = parseHTML(innerHTML);
+            }
+            currentPos = closePos + closingTag.length;
+          } else {
+            currentPos = tagEnd + 1;
+          }
         } else {
           currentPos = tagEnd + 1;
         }
-      } else {
-        currentPos = tagEnd + 1;
-      }
 
-      nodes.push({
-        type: "element",
-        tag,
-        attributes,
-        children,
-      });
-    } else {
-      // Text node
-      const nextTag = normalized.indexOf("<", currentPos);
-      const textEnd = nextTag === -1 ? normalized.length : nextTag;
-      const text = normalized.substring(currentPos, textEnd).trim();
-
-      if (text) {
         nodes.push({
-          type: "text",
-          content: text,
+          type: "element",
+          tag,
+          attributes,
+          children,
         });
+      } else {
+        // Text node
+        const nextTag = normalized.indexOf("<", currentPos);
+        const textEnd = nextTag === -1 ? normalized.length : nextTag;
+        const text = normalized.substring(currentPos, textEnd).trim();
+
+        if (text) {
+          nodes.push({
+            type: "text",
+            content: text,
+          });
+        }
+
+        currentPos = textEnd;
       }
-
-      currentPos = textEnd;
     }
-  }
 
-  return nodes;
+    return nodes;
+  } catch (error) {
+    // If parsing fails for any reason, return empty array
+    console.error("HTML parser error:", error);
+    return [];
+  }
 }
 
 /**
